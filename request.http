@@ -1,0 +1,18 @@
+### Create a new User
+
+POST  http://Localhost:3000/api/user/
+Content-Type: application/json
+
+{
+    "username": "IvanMoch",
+    "password": "IvanMoch",
+    "email": "mochniyivan@gmail"
+}
+
+### Get user information
+
+GET http://Localhost:3000/api/user/IvanMoch
+
+### modify user information
+
+PATCH http://Localhost:3000/api/user/IvanMoch
