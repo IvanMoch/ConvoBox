@@ -1,6 +1,8 @@
+import jwt from "jsonwebtoken"
 import { sqlModel } from "../Model/sqlModel.js"
 import { validateUser } from "../Schemas/userSchema.js"
 import bcryptjs from 'bcryptjs'
+import { SECRET_KEY } from "../config.js"
 
 
 export class UserController{
@@ -35,6 +37,20 @@ export class UserController{
 
         
         return res.status(200).json(user)
+    }
+
+    static logUser = async (req, res) => {
+        
+        const { username, password } = req.body
+        
+        const user = await sqlModel.getUser({ username })
+        const checkedPassword = await bcryptjs.compare(password, user.password)
+        if (user && checkedPassword) {
+            const token = jwt.sign({ username: user.username, email: user.email }, SECRET_KEY, { expiresIn: '1h' })
+            return res.status(200).cookie('accessToken', token).json(user)
+        }
+
+        return res.status(400).send('something goes wrong')
     }
 
     static deleteUser = async (req, res) => {

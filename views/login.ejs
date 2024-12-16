@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConvoBox - Login</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>ConvoBox</h1>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="forms">
+        <!-- Login Form -->
+        <section class="form login-form">
+          <h2>Log In</h2>
+          <form>
+            <input type="text" placeholder="Username or Email" id="usernameLogIn" required>
+            <input type="password" placeholder="Password" id="passwordLogIn" required>
+            <button id="logInButton">Log In</button>
+            <a href="#">Forgot Password?</a>
+          </form>
+        </section>
+        
+        <!-- Sign-Up Form -->
+        <section class="form signup-form">
+          <h2>Sign Up</h2>
+          <form>
+            <input type="text" placeholder="Username" id="usernameSignUp" required>
+            <input type="email" placeholder="Email" id="emailSignUp" required>
+            <input type="password" placeholder="Password" id="passwordSignUp" required>
+            <button id="signUpButton">Sign Up</button>
+          </form>
+        </section>
+      </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2024 ConvoBox. All rights reserved.</p>
+      <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+    </footer>
+  </div>
+</body>
+<script src="login.js"></script>
+</html>

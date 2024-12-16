@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConvoBox - Main</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>ConvoBox</h1>
+      <div class="user-info">
+        <span class="username">Hello, <%= username %></span>
+        <button class="profile-settings">⚙</button>
+        <button class="logout-button">Logout</button>
+      </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Favorite Groups Section -->
+      <section class="favorite-groups">
+        <h2>Your Favorite Groups</h2>
+        <div class="group-list">
+          <div class="group-card">
+            <h3>JavaScript Enthusiasts</h3>
+            <p>A group for all JavaScript lovers to discuss frameworks, tips, and trends.</p>
+            <button>Enter Group</button>
+          </div>
+          <div class="group-card">
+            <h3>AI & Machine Learning</h3>
+            <p>Connect with enthusiasts and professionals in AI and ML fields.</p>
+            <button>Enter Group</button>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Suggested Groups Section -->
+      <section class="suggested-groups">
+        <h2>Suggested Groups</h2>
+        <div class="group-list">
+          <div class="group-card">
+            <h3>Web Development</h3>
+            <p>Discuss HTML, CSS, JavaScript, and backend development.</p>
+            <button>Join Group</button>
+          </div>
+          <div class="group-card">
+            <h3>Gaming Community</h3>
+            <p>A space to share your love for gaming and new releases.</p>
+            <button>Join Group</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

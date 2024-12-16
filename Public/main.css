@@ -1,0 +1,112 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1B1B1B; /* Dark Background */
+  color: #D1D1D1; /* Light Text */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #2E3A59; /* Primary Dark Blue */
+}
+
+.header h1 {
+  margin: 0;
+  color: #7D3C98; /* Electric Purple */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-right: 10px;
+  color: #D1D1D1;
+}
+
+.profile-settings {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #2ECC71; /* Emerald Green */
+  cursor: pointer;
+}
+
+/* Main Content */
+.main-content {
+  padding: 20px;
+}
+
+.favorite-groups, .suggested-groups {
+  margin-bottom: 40px;
+}
+
+.favorite-groups h2, .suggested-groups h2 {
+  color: #2ECC71; /* Emerald Green */
+}
+
+.group-list {
+  display: flex;
+  gap: 20px;
+}
+
+.group-card {
+  background-color: #2C2C2C; /* Slightly Lighter Dark */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  width: 300px;
+}
+
+.group-card h3 {
+  color: #7D3C98; /* Electric Purple */
+  margin-bottom: 10px;
+}
+
+.group-card p {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.group-card button {
+  padding: 10px;
+  width: 100%;
+  background-color: #7D3C98; /* Electric Purple */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.group-card button:hover {
+  background-color: #9B59B6; /* Slightly Lighter Purple */
+}
+
+/* Logout Button */
+.logout-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #E74C3C; /* Bright Coral */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #C0392B; /* Darker Coral */
+}
