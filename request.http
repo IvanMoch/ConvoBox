@@ -11,7 +11,7 @@ Content-Type: application/json
 
 ### Get user information
 
-GET http://Localhost:3000/api/user/IvanMoch
+GET http://Localhost:3000/api/user/search/IvanMoch
 
 ### modify user information
 
@@ -27,3 +27,6 @@ Content-Type: application/json
     "username" : "IvanMoch",
     "password" : "IvanMoch"
 }
+
+### log out user
+GET http://localhost:3000/api/user/logOut

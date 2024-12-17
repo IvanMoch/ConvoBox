@@ -53,6 +53,11 @@ export class UserController{
         return res.status(400).send('something goes wrong')
     }
 
+    static logOut = async (req, res) => {
+        //const token = req.cookies.accessToken
+        return res.clearCookie('accessToken').render('login')
+    }
+
     static deleteUser = async (req, res) => {
         
     }
