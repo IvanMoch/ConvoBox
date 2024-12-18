@@ -16,7 +16,6 @@ export class sqlModel {
             ...newUser
         }
 
-        console.log(user)
         const result = await pool.query(`insert into users(id,username,email,password)
         values(UUID_TO_BIN(?),?,?,?)`, [user.id, user.username, user.email, user.password])
         
@@ -30,6 +29,21 @@ export class sqlModel {
         const [result] = await pool.query(`select username, email, password from users where username=?`, [username])
 
 
+        return result[0]
+    }
+
+    static async createRoom(newRoom) {
+
+        const result = pool.query(`insert into ConvoBox.rooms (name, private, description, likes) values(?,?,?,?)`, [newRoom.name, newRoom.private, newRoom.description, newRoom.likes])
+
+        return result
+
+    }
+
+    static async getRoom({ roomName }) {
+        
+        const [result] = await pool.query(`select name, private, description, likes from ConvoBox.rooms where name = ?`,[roomName])
+        
         return result[0]
     }
 }

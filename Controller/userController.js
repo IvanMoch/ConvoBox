@@ -36,7 +36,7 @@ export class UserController{
         const result = await sqlModel.createUser(user)
 
         
-        return res.status(200).json(user)
+        return res.status(200).json(result)
     }
 
     static logUser = async (req, res) => {

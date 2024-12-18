@@ -30,3 +30,19 @@ Content-Type: application/json
 
 ### log out user
 GET http://localhost:3000/api/user/logOut
+
+### Create room
+
+POST http://localhost:3000/api/room/create
+Content-Type: application/json
+
+{
+    "name" : "the room",
+    "private": 1,
+    "description" : "the description of the room",
+    "likes" : 0
+}
+
+### Get room information
+
+GET http://localhost:3000/api/room/search/the%20room

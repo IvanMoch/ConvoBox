@@ -6,6 +6,8 @@ import jwt from 'jsonwebtoken'
 import path, { dirname } from 'path'
 import { SECRET_KEY } from './config.js'
 import { stat } from 'fs'
+import { render } from 'ejs'
+import { roomRouter } from './Routes/roomRouter.js'
 
 
 const app = express()
@@ -17,8 +19,8 @@ app.use(express.json())
 app.use(cookieParser())
 app.set('view engine', 'ejs')
 
-
 app.get('/', (req, res) => {
+
     res.render('login')
 })
 
@@ -26,7 +28,7 @@ app.get('/main', (req, res) => {
     const token = req.cookies.accessToken
 
     if (!token) {
-        return res.status(400).send('not Authorized')
+        return res.render('login')
     }
 
     try {
@@ -39,6 +41,7 @@ app.get('/main', (req, res) => {
 })
 
 app.use('/api/user', userRouter)
+app.use('/api/room', roomRouter)
 
 app.listen(3000, (req, res) => {
     console.log(`Server listening on: http://localhost:3000/`)
