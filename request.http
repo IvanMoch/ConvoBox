@@ -46,3 +46,18 @@ Content-Type: application/json
 ### Get room information
 
 GET http://localhost:3000/api/room/search/the%20room
+
+### send message
+
+POST http://localhost:3000/api/room/senMessage
+Content-Type: application/json
+
+{
+    "user_id" : "c329ec2f-bb59-11ef-8a34-900f0c400779",
+    "content" : "Message number 2",
+    "room_id" : "3f8c3a3a-bd67-11ef-908c-900f0c400779"    
+}
+
+### Get all the messages of a room
+
+GET http://localhost:3000/api/room/getMessages/the%20room

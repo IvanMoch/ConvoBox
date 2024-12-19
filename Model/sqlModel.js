@@ -46,4 +46,18 @@ export class sqlModel {
         
         return result[0]
     }
+
+    static async sendMessage(messageBody) {
+        
+        const result = await pool.query('insert into ConvoBox.messages (`user_id`,`content`,`room_id`) values(UUID_TO_BIN(?), ?, UUID_TO_BIN(?))', [messageBody.user_id, messageBody.content, messageBody.room_id])
+
+        return result
+    }
+
+    static async getRoomMessages({ roomName }) {
+        
+        const [result] = await pool.query('select username, content from from_to_messages where from_to_messages.name = ?', [roomName])
+
+        return result
+    }
 }
