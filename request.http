@@ -61,3 +61,17 @@ Content-Type: application/json
 ### Get all the messages of a room
 
 GET http://localhost:3000/api/room/getMessages/the%20room
+
+### Get the favorites rooms
+
+GET http://localhost:3000/api/room/favoritesRooms/c329ec2f-bb59-11ef-8a34-900f0c400779
+
+### Add new favorite
+
+POST http://localhost:3000/api/room/addFavorite
+Content-Type: application/json
+
+{
+    "roomID": "3f8c3a3a-bd67-11ef-908c-900f0c400779",
+    "userID": "c329ec2f-bb59-11ef-8a34-900f0c400779"
+}

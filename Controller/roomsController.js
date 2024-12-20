@@ -50,7 +50,6 @@ export class roomsController {
     }
 
     static getRoomMessages = async (req, res) => {
-        // TODO: get all the messages from the view "from_to_messages"
 
         const { roomName } = req.params
 
@@ -61,6 +60,33 @@ export class roomsController {
         }
 
         return res.status(400).json({message: "something goes wrong"})
+    }
+
+    static getFavoriteRooms = async (req, res) => {
+
+        const { userID } = req.params
+        
+        const result = await sqlModel.getFavoriteRooms({ userID })
+        
+        if (result) {
+            return res.status(200).json(result)
+        }
+
+        return res.status(400).json({message : 'user not found'})
+    }
+
+    static addFavoriteRoom = async (req, res) => {
+
+        const { roomID, userID } = req.body
+        
+        const result = await sqlModel.addFavoriteRoom({ userID, roomID })
+        
+        if (result) {
+            return res.status(200).json({success : true})
+        }
+
+        return res.status(400).json({success : false})
+
     }
 
     static modifyRoom = async (req, res) => {
