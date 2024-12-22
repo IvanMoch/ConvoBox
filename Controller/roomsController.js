@@ -5,14 +5,21 @@ import { json } from "express"
 
 export class roomsController {
 
-    static createRoom =  async (req, res) => {
+    static createRoom = async (req, res) => {
+        
         
         const newRoom = validateRoom(req.body)
 
-        console.log(req.body)
+        if (await sqlModel.checkRoom({ name: newRoom.data.name })) {
+            return res.status(400).json({message : 'Room already exist'})
+        }
 
         if (newRoom.error) {
             return res.status(400).json({message : 'Check the values'})
+        }
+
+        if (await sqlModel.checkUser({ identifier: newRoom.data.name, field: 'name' })) {
+            return res.status(400).json({message: 'user already exist'})
         }
 
         const result = sqlModel.createRoom(newRoom.data)
@@ -25,6 +32,7 @@ export class roomsController {
     }
 
     static getRoom = async (req, res) => {
+
         const { roomName } = req.params
         
         const result = await sqlModel.getRoom({ roomName })
@@ -38,6 +46,14 @@ export class roomsController {
 
     static sendMessage = async (req, res) => {
         const newMessage = validateMessage(req.body)
+
+        if (!await sqlModel.checkRoom({ id: newMessage.data.room_id })) {
+            return res.status(400).json({message: 'Room does not exist'})
+        }
+
+        if (!await sqlModel.checkUser({ id: newMessage.data.user_id })) {
+            return res.status(400).json({message: 'User does not exist'})
+        }
 
         const result = await sqlModel.sendMessage(newMessage.data)
         
@@ -78,6 +94,14 @@ export class roomsController {
     static addFavoriteRoom = async (req, res) => {
 
         const { roomID, userID } = req.body
+
+        if (!(await sqlModel.checkRoom({ id: roomID }))) {
+            return res.status(400).json({message: 'room does not exist'})
+        }
+
+        if (!(await sqlModel.checkUser({ id: userID }))) {
+            return res.status(400).json({message: 'user does not exist'})
+        }
         
         const result = await sqlModel.addFavoriteRoom({ userID, roomID })
         

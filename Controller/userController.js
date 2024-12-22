@@ -28,6 +28,10 @@ export class UserController{
 
         const user = newUser.data
 
+        if (await sqlModel.checkUser({ username: user.username })) {
+            return res.status(400).json({message: 'User already exist'})
+        }
+
         const hashedPassword = await bcryptjs.hash(user.password,10)
 
         user.password = hashedPassword

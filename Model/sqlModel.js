@@ -23,6 +23,49 @@ export class sqlModel {
         return user
     }
 
+    //This method checks if a user exist
+    static async checkUser({ id, username }) {
+        
+        let result 
+
+        if (id) {
+            [result] = await pool.query('select * from ConvoBox.users where username = ?', [username])
+        }
+
+        if (username) {
+            [result] = await pool.query('select * from ConvoBox.users where id = UUID_TO_BIN(?)', [id])
+        }
+        
+        if (result.length > 0) {
+            return true
+        }
+
+        return false
+    }
+
+    //This method checks if a room exist
+    static async checkRoom({ id, name }) {
+
+        let result
+        
+        if (id) {
+            [result] = await pool.query('select * from ConvoBox.rooms where id = UUID_TO_BIN(?)', [id])
+        }
+
+
+        if (name) {
+            [result] = await pool.query('select * from ConvoBox.rooms where name = ?', [name])
+        }
+
+
+
+        if (result.length > 0) {
+            return true
+        }
+
+        return false
+    }
+
     //This method gets the user information by it's username
     static async getUser({ username }) {
         
