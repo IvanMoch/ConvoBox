@@ -44,10 +44,10 @@ function login(username, password){
             'content-type': 'application/json'
         },
         body: JSON.stringify({username, password})
-     })
+    })
         .then((res) => {
             if (res.ok) {
-            window.location.href = `/main`
+                window.location.href = `/main`
             }
             return console.log('Error while fetching')
         })

@@ -4,23 +4,15 @@ export class sqlModel {
     
     //This method creates a new User
     static async createUser( newUser ) {
-        let [data] = await pool.query('SELECT UUID() as uuid')
-        let id
 
-        if (data.length > 0) {
-            id = data[0].uuid
-        }
-
-        const user = {
-            id,
-            ...newUser
-        }
-
-        const result = await pool.query(`insert into users(id,username,email,password)
-        values(UUID_TO_BIN(?),?,?,?)`, [user.id, user.username, user.email, user.password])
+        const result = await pool.query(`insert into users(username,email,password)
+        values(?,?,?)`, [newUser.username, newUser.email, newUser.password])
         
 
-        return user
+        if (result.affectedRows > 0) {
+            return user
+        }
+        
     }
 
     //This method checks if a user exist
@@ -28,13 +20,14 @@ export class sqlModel {
         
         let result 
 
-        if (id) {
+        if (username) {
             [result] = await pool.query('select * from ConvoBox.users where username = ?', [username])
         }
 
-        if (username) {
+        if (id) {
             [result] = await pool.query('select * from ConvoBox.users where id = UUID_TO_BIN(?)', [id])
         }
+
         
         if (result.length > 0) {
             return true
@@ -49,14 +42,15 @@ export class sqlModel {
         let result
         
         if (id) {
+            console.log(id)
             [result] = await pool.query('select * from ConvoBox.rooms where id = UUID_TO_BIN(?)', [id])
         }
 
 
         if (name) {
+            console.log(name)
             [result] = await pool.query('select * from ConvoBox.rooms where name = ?', [name])
         }
-
 
 
         if (result.length > 0) {
@@ -118,7 +112,10 @@ export class sqlModel {
         return result
     }
 
-    //TODO: Create a function that checks if a user exist
-    //TODO: Create a function that checks if a room exist
-    //TODO: implement both every time we work with a team or user
+    static async getSuggestedRooms() {
+        
+        const [result] = await pool.query('select name, description, likes from rooms where private = 0 order by likes asc limit 9')
+
+        return result
+    }
 }

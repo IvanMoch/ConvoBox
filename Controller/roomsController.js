@@ -7,7 +7,6 @@ export class roomsController {
 
     static createRoom = async (req, res) => {
         
-        
         const newRoom = validateRoom(req.body)
 
         if (await sqlModel.checkRoom({ name: newRoom.data.name })) {
@@ -111,6 +110,13 @@ export class roomsController {
 
         return res.status(400).json({success : false})
 
+    }
+
+    static getSuggested = async (req, res) => {
+
+        const rooms = await sqlModel.getSuggestedRooms()
+
+        return res.status(200).json(rooms)
     }
 
     static modifyRoom = async (req, res) => {

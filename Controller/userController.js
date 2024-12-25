@@ -20,6 +20,7 @@ export class UserController{
     }
 
     static createUser = async (req, res) => {
+        
         const newUser = validateUser(req.body)
 
         if (newUser.error) {
