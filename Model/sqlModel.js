@@ -42,13 +42,11 @@ export class sqlModel {
         let result
         
         if (id) {
-            console.log(id)
             [result] = await pool.query('select * from ConvoBox.rooms where id = UUID_TO_BIN(?)', [id])
         }
 
 
         if (name) {
-            console.log(name)
             [result] = await pool.query('select * from ConvoBox.rooms where name = ?', [name])
         }
 

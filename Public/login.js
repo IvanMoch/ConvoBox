@@ -49,7 +49,7 @@ function login(username, password){
             if (res.ok) {
                 window.location.href = `/main`
             }
-            return console.log('Error while fetching')
+            alert('Username or password is incorrect')
         })
         
 }
