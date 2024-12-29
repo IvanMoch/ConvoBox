@@ -61,7 +61,7 @@ export class sqlModel {
     //This method gets the user information by it's username
     static async getUser({ username }) {
         
-        const [result] = await pool.query(`select username, email, password from users where username=?`, [username])
+        const [result] = await pool.query(`select BIN_TO_UUID(id) as id, username, email, password from users where username=?`, [username])
 
 
         return result[0]

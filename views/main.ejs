@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ConvoBox - Main</title>
   <link rel="stylesheet" href="main.css">
+  <script>
+    const userID = '<%= id %>';
+    console.log(userID)
+  </script>
 </head>
 <body>
   <div class="container">
@@ -23,7 +27,7 @@
       <!-- Favorite Groups Section -->
       <section class="favorite-groups">
         <h2>Your Favorite Groups</h2>
-        <div class="group-list">
+        <div class="group-list" id="favorite-groups">
           <div class="group-card">
             <h3>JavaScript Enthusiasts</h3>
             <p>A group for all JavaScript lovers to discuss frameworks, tips, and trends.</p>
@@ -40,7 +44,7 @@
       <!-- Suggested Groups Section -->
       <section class="suggested-groups">
         <h2>Suggested Groups</h2>
-        <div class="group-list">
+        <div class="group-list" id="suggested-groups">
           <div class="group-card">
             <h3>Web Development</h3>
             <p>Discuss HTML, CSS, JavaScript, and backend development.</p>
@@ -55,6 +59,6 @@
       </section>
     </main>
   </div>
-  <script src="main.js"></script>
+<script src="main.js"></script>
 </body>
 </html>

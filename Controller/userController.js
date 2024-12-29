@@ -51,7 +51,7 @@ export class UserController{
         const user = await sqlModel.getUser({ username })
         const checkedPassword = await bcryptjs.compare(password, user.password)
         if (user && checkedPassword) {
-            const token = jwt.sign({ username: user.username, email: user.email }, SECRET_KEY, { expiresIn: '1h' })
+            const token = jwt.sign({ username: user.username, email: user.email, id: user.id }, SECRET_KEY, { expiresIn: '1h' })
             return res.status(200).cookie('accessToken', token).json(user)
         }
 
