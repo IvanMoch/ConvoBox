@@ -74,8 +74,8 @@ POST http://localhost:3000/api/room/addFavorite
 Content-Type: application/json
 
 {
-    "roomID": "29154593-c1a4-11ef-a3fc-900f0c400779",
-    "userID": "c329ec2f-bb59-11ef-8a34-900f0c400770"
+    "roomID": "abb2b995-c19e-11ef-a3fc-900f0c400779",
+    "userID": "c329ec2f-bb59-11ef-8a34-900f0c400779"
 }
 
 ### Get suggested rooms
