@@ -112,7 +112,7 @@ export class sqlModel {
 
     static async getSuggestedRooms() {
         
-        const [result] = await pool.query('select name, description, likes from rooms where private = 0 order by likes asc limit 9')
+        const [result] = await pool.query('select BIN_TO_UUID(id) as id,name, description, likes from rooms where private = 0 order by likes asc limit 9')
 
         return result
     }

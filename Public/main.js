@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 rooms.forEach((room) => {
                     document.getElementById('suggested-groups').innerHTML += `
                     <div class="group-card
-                    " id="${userID}">
+                    " id="${room.id}">
                         <h3>${room.name}</h3>
                         <p>${room.description}</p>
                         <button>Enter Group</button>
