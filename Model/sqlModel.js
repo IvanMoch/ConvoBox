@@ -89,16 +89,16 @@ export class sqlModel {
         return result
     }
 
-    static async getRoomMessages({ roomName }) {
+    static async getRoomMessages({ roomID }) {
         
-        const [result] = await pool.query('select username, content from from_to_messages where from_to_messages.name = ?', [roomName])
+        const [result] = await pool.query('select BIN_TO_UUID(roomID) as roomID, username, content from ConvoBox.from_to_messages where BIN_TO_UUID(roomID) = ?', [roomID])
 
         return result
     }
 
     static async getFavoriteRooms({ userID }) {
 
-        const [result] = await pool.query('select * from show_users_favorites where id = UUID_TO_BIN(?)', [userID])
+        const [result] = await pool.query('select BIN_TO_UUID(room_id) as id, name, description from show_users_favorites where id = UUID_TO_BIN(?)', [userID])
 
         return result
     }

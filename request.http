@@ -62,7 +62,7 @@ Content-Type: application/json
 
 ### Get all the messages of a room
 
-GET http://localhost:3000/api/room/getMessages/the%20room
+GET http://localhost:3000/api/room/getMessages/3f8c3a3a-bd67-11ef-908c-900f0c400779
 
 ### Get the favorites rooms
 

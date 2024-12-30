@@ -66,9 +66,9 @@ export class roomsController {
 
     static getRoomMessages = async (req, res) => {
 
-        const { roomName } = req.params
+        const { roomID } = req.params
 
-        const result = await sqlModel.getRoomMessages({ roomName })
+        const result = await sqlModel.getRoomMessages({ roomID })
         
         if (result) {
             return res.status(200).json(result)
