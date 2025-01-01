@@ -5,7 +5,6 @@ body {
   background-color: #1B1B1B; /* Dark Background */
   color: #D1D1D1; /* Light Text */
 }
-
 .container {
   display: flex;
   flex-direction: column;
@@ -110,4 +109,102 @@ body {
 
 .logout-button:hover {
   background-color: #C0392B; /* Darker Coral */
+}
+
+main.blur-background {
+  filter: blur(5px);
+}
+
+header.blur-background {
+  filter: blur(5px);
+}
+
+.chat-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 600px;
+  background-color: #2C2C2C;
+  border: 1px solid #7D3C98;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #2E3A59;
+  color: #ccc;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.room-name {
+  font-weight: bold;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #2C2C2C;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 5px;
+  background-color: #3d3d3d;
+  border-radius: 10px;
+  border: none;
+  color: #ccc;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #7D3C98;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.message {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 70%;
+}
+
+.message.user {
+  background-color: #2ECC71;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.message.other {
+  background-color: #9B59B6;
+  color: #fff;
+  align-self: flex-start;
 }

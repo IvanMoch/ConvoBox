@@ -1,5 +1,4 @@
 
-
 //This function logs out the user and erase the session cookie
 function logout() {
     fetch('/api/user/logOut')
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 data.forEach((room) => {
                     document.getElementById('favorite-groups').innerHTML += `
-                    <div class="group-card" id="${room.id}" name="${room.name}" onClick="getMessages('${room.id}')">
+                    <div class="group-card" id="${room.id}" name="${room.name}" onClick="showChatWindow()">
                         <h3>${room.name}</h3>
                         <p>${room.description}</p>
                         <button>Enter Group</button>
@@ -53,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 rooms.forEach((room) => {
                     document.getElementById('suggested-groups').innerHTML += `
-                    <div class="group-card" id="${room.id}" name="${room.name}" onClick="getMessages('${room.id}')">
+                    <div class="group-card" id="${room.id}" name="${room.name}" onClick="showChatWindow()">
                         <h3>${room.name}</h3>
                         <p>${room.description}</p>
                         <button>Enter Group</button>
@@ -63,20 +62,17 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 })
 
-//This function gets the messages of a room
+//This function close the chat window
+function closeChatWindow() {
+    document.getElementById('chatWindow').style.display = 'none';
+    document.querySelector('main').classList.remove('blur-background')
+    document.querySelector('header').classList.remove('blur-background')
+}
 
-function getMessages(roomID) {
+//This function show the chat window
 
-    fetch(`/api/room/getMessages/${roomID}`)
-    .then((res) => {
-        if (res.ok) {
-            return res.json()
-        }
-    })
-    .then((messages) => {
-            messages.forEach((message) => {
-                console.log(message)
-            })
-        
-    })
+function showChatWindow() {
+    document.getElementById('chatWindow').style.display = 'flex'
+    document.querySelector('main').classList.add('blur-background')
+    document.querySelector('header').classList.add('blur-background')
 }

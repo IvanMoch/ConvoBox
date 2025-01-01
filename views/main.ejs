@@ -36,7 +36,25 @@
         <h2>Suggested Groups</h2>
         <div class="group-list" id="suggested-groups"></div>
       </section>
-    </main>
+      </main>
+      
+      <!-- Chat Window -->
+      <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+          <span class="room-name">Room Name</span>
+          <button class="close-btn" onclick="closeChatWindow()">X</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <!-- Messages will be displayed here -->
+        </div>
+        <div class="chat-input">
+          <input type="text" id="messageInput" placeholder="Type your message here...">
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+
+
+    
   </div>
 <script src="main.js"></script>
 </body>
