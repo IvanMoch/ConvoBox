@@ -63,6 +63,7 @@ body {
 }
 
 .group-card {
+  position: relative;
   background-color: #2C2C2C; /* Slightly Lighter Dark */
   padding: 20px;
   border-radius: 8px;
@@ -80,7 +81,7 @@ body {
   font-size: 14px;
 }
 
-.group-card button {
+.show-chat {
   padding: 10px;
   width: 100%;
   background-color: #7D3C98; /* Electric Purple */
@@ -91,7 +92,7 @@ body {
   font-weight: bold;
 }
 
-.group-card button:hover {
+.show-chat:hover {
   background-color: #9B59B6; /* Slightly Lighter Purple */
 }
 
@@ -163,6 +164,8 @@ header.blur-background {
   padding: 10px;
   overflow-y: auto;
   background-color: #2C2C2C;
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-input {
@@ -195,16 +198,38 @@ header.blur-background {
   padding: 10px;
   border-radius: 5px;
   max-width: 70%;
+  display: inline-block;
 }
 
 .message.user {
   background-color: #2ECC71;
   color: #fff;
   align-self: flex-end;
+  text-align: right;
 }
 
 .message.other {
   background-color: #9B59B6;
   color: #fff;
   align-self: flex-start;
+  text-align: left;
+}
+
+.add-to-favorites {
+  position: absolute;
+  top: 10px;
+  left: 240px;
+  background-color: #7D3C98;
+  color: #ccc;
+  border: none;
+  border-radius: 10px;
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: center;
+}
+
+.add-to-favorites:hover {
+  background-color: #9B59B6;
 }

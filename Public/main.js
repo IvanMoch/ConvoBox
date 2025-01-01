@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 data.forEach((room) => {
                     document.getElementById('favorite-groups').innerHTML += `
-                    <div class="group-card" id="${room.id}" name="${room.name}" onClick="showChatWindow()">
+                    <div class="group-card" id="${room.id}" name="${room.name}">
                         <h3>${room.name}</h3>
                         <p>${room.description}</p>
-                        <button>Enter Group</button>
+                        <button class="show-chat" onClick="showChatWindow()">Enter Group</button>
                     </div>`
                 })
             }
@@ -52,10 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 rooms.forEach((room) => {
                     document.getElementById('suggested-groups').innerHTML += `
-                    <div class="group-card" id="${room.id}" name="${room.name}" onClick="showChatWindow()">
+                    <div class="group-card" id="${room.id}" name="${room.name}">
                         <h3>${room.name}</h3>
                         <p>${room.description}</p>
-                        <button>Enter Group</button>
+                        <button class="add-to-favorites" onclick="addToFavorites('${room.id}')">Add</button>
+                        <button class="show-chat" onClick="showChatWindow()">Enter Group</button>
                     </div>`
                 })
             }
@@ -75,4 +76,50 @@ function showChatWindow() {
     document.getElementById('chatWindow').style.display = 'flex'
     document.querySelector('main').classList.add('blur-background')
     document.querySelector('header').classList.add('blur-background')
+}
+
+function sendMessage() {
+  const messageInput = document.getElementById('messageInput');
+  const message = messageInput.value;
+  if (message.trim() !== '') {
+    const chatMessages = document.getElementById('chatMessages');
+    const messageElement = document.createElement('div');
+    messageElement.textContent = message;
+    messageElement.classList.add('message', 'user');
+    chatMessages.appendChild(messageElement);
+    messageInput.value = '';
+  }
+}
+
+
+function receiveMessage(message) {
+  const chatMessages = document.getElementById('chatMessages');
+  const messageElement = document.createElement('div');
+  messageElement.textContent = message;
+  messageElement.classList.add('message', 'other');
+  chatMessages.appendChild(messageElement);
+}
+
+
+
+//This function adds a new room to the favorites of the user
+
+function addToFavorites(roomID) {
+    console.log(roomID, userID)
+    fetch(`/api/room/addFavorite`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userID, roomID })
+    })
+        .then((res) => {
+            if (res.ok) {
+                return document.getElementById('favorite-groups').appendChild(document.getElementById(roomID))
+            }
+            console.log('error')
+        })
+        .catch((err) => {
+            console.log(err)
+        })
 }
