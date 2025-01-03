@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="group-card" id="${room.id}" name="${room.name}">
                         <h3>${room.name}</h3>
                         <p>${room.description}</p>
-                        <button class="show-chat" onClick="showChatWindow()">Enter Group</button>
+                        <button class="delete-from-favorites" onclick="deleteFromFavorites('${room.id}')">X</button>
+                        <button class="show-chat" onClick="showChatWindow('${room.id}')">Enter Group</button>
                     </div>`
                 })
             }
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h3>${room.name}</h3>
                         <p>${room.description}</p>
                         <button class="add-to-favorites" onclick="addToFavorites('${room.id}')">Add</button>
-                        <button class="show-chat" onClick="showChatWindow()">Enter Group</button>
+                        <button class="show-chat" onClick="showChatWindow('${room.id}')">Enter Group</button>
                     </div>`
                 })
             }
@@ -114,14 +115,63 @@ function addToFavorites(roomID) {
     })
         .then((res) => {
             if (res.ok) {
-                return document.getElementById('favorite-groups').appendChild(document.getElementById(roomID))
+                document.getElementById(roomID).remove()
+                return res.json()
             }else if(res.status === 400){
                 return res.json().then((data) => {
                     alert(data.message)
                 })
             }
         })
+        .then((room) => {
+            console.log(room)
+            document.getElementById('favorite-groups').innerHTML += `
+            <div class="group-card" id="${room.id}" name="${room.name}">
+                        <h3>${room.name}</h3>
+                        <p>${room.description}</p>
+                        <button class="delete-from-favorites" onclick="deleteFromFavorites('${room.id}')">X</button>
+                        <button class="show-chat" onClick="showChatWindow('${room.id}')">Enter Group</button>
+                    </div>
+            `
+        })
         .catch((err) => {
-            alert(err)
+            console.log(err)
+        })
+}
+
+//This function deletes a room from the favorites of the user
+
+function deleteFromFavorites(roomID) {
+    fetch(`/api/room/deleteFavorite`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userID, roomID })
+    })
+        .then((res) => {
+            if (res.ok) {
+                document.getElementById(roomID).remove()
+                return res.json()
+            }else if(res.status === 400){
+                return res.json().then((data) => {
+                    alert(data.message)
+                })
+            }
+        })
+        .then((room) => {
+            console.log(room)
+            document.getElementById('suggested-groups').innerHTML += `
+            
+            <div class="group-card" id="${room.id}" name="${room.name}">
+                <h3>${room.name}</h3>
+                <p>${room.description}</p>
+                <button class="add-to-favorites" onclick="addToFavorites('${room.id}')">Add</button>
+                <button class="show-chat" onClick="showChatWindow('${room.id}')">Enter Group</button>
+            </div>
+        `
+        })
+        .catch((err) => {
+            console.log(err)
         })
 }

@@ -110,10 +110,11 @@ export class roomsController {
         const result = await sqlModel.addFavoriteRoom({ userID, roomID })
         
         if (result) {
-            return res.status(200).json({success : true})
+            const room = await sqlModel.getRoom({ id: roomID })
+            return res.status(200).json(room)
         }
 
-        return res.status(400).json({success : false})
+        return res.status(400).json({message: 'Query failed'})
 
     }
 
@@ -122,6 +123,32 @@ export class roomsController {
         const rooms = await sqlModel.getSuggestedRooms()
 
         return res.status(200).json(rooms)
+    }
+
+    static deleteFavoriteRoom = async (req, res) => {
+            
+        const { roomID, userID } = req.body
+    
+            if (!(await sqlModel.checkRoom({ id: roomID }))) {
+                return res.status(400).json({message: 'room does not exist'})
+            }
+    
+            if (!(await sqlModel.checkUser({ id: userID }))) {
+                return res.status(400).json({message: 'user does not exist'})
+            }
+    
+            if (!(await sqlModel.checkFavoriteRoom({ userID, roomID }))) {
+                return res.status(400).json({message: 'room is not favorite'})
+            }
+    
+            const result = await sqlModel.deleteFavoriteRoom({ userID, roomID })
+    
+        if (result) {
+                const room = await sqlModel.getRoom({ id: roomID })
+                return res.status(200).json(room)
+            }
+    
+        return res.status(400).json({ success: false })
     }
 
     static modifyRoom = async (req, res) => {

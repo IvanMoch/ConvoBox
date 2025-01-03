@@ -72,12 +72,17 @@ export class sqlModel {
         }
 
     //This method gets the user information by it's username
-    static async getUser({ username }) {
+    static async getUser({ username, id }) {
         
-        const [result] = await pool.query(`select BIN_TO_UUID(id) as id, username, email, password from users where username=?`, [username])
+        if (username) {
+            const [result] = await pool.query(`select BIN_TO_UUID(id) as id, username, email, password from users where username=?`, [username])
+            return result[0]
+        }
 
-
-        return result[0]
+        if (id) {    
+            const [result] = await pool.query(`select BIN_TO_UUID(id) as id, username, email, password from users where id=UUID_TO_BIN(?)`, [id])
+            return result[0]
+        }
     }
 
     static async createRoom(newRoom) {
@@ -88,11 +93,16 @@ export class sqlModel {
 
     }
 
-    static async getRoom({ roomName }) {
+    static async getRoom({ roomName, id }) {
         
-        const [result] = await pool.query(`select name, private, description, likes from ConvoBox.rooms where name = ?`,[roomName])
-        
-        return result[0]
+        if (roomName) {
+            const [result] = await pool.query(`select BIN_TO_UUID(id) as id, name, private, description, likes from ConvoBox.rooms where name = ?`, [roomName])
+            return result[0]
+        }
+        if (id) {
+            const [result] = await pool.query(`select BIN_TO_UUID(id) as id, name, private, description, likes from ConvoBox.rooms where id = UUID_TO_BIN(?)`, [id])
+            return result[0]
+        }
     }
 
     static async sendMessage(messageBody) {
@@ -129,4 +139,11 @@ export class sqlModel {
 
         return result
     }
+
+    static async deleteFavoriteRoom({ userID, roomID }) {
+            
+            const [result] = await pool.query('delete from ConvoBox.favorites where user_id = UUID_TO_BIN(?) and room_id = UUID_TO_BIN(?)', [userID, roomID])
+    
+            return result
+        }
 }
