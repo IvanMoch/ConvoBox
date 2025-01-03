@@ -94,12 +94,17 @@ export class roomsController {
 
         const { roomID, userID } = req.body
 
+
         if (!(await sqlModel.checkRoom({ id: roomID }))) {
             return res.status(400).json({message: 'room does not exist'})
         }
 
         if (!(await sqlModel.checkUser({ id: userID }))) {
             return res.status(400).json({message: 'user does not exist'})
+        }
+
+        if (await sqlModel.checkFavoriteRoom({ userID, roomID })) {
+            return res.status(400).json({message: 'room already favorite'})
         }
         
         const result = await sqlModel.addFavoriteRoom({ userID, roomID })

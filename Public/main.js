@@ -105,7 +105,6 @@ function receiveMessage(message) {
 //This function adds a new room to the favorites of the user
 
 function addToFavorites(roomID) {
-    console.log(roomID, userID)
     fetch(`/api/room/addFavorite`, {
         method: 'POST',
         headers: {
@@ -116,10 +115,13 @@ function addToFavorites(roomID) {
         .then((res) => {
             if (res.ok) {
                 return document.getElementById('favorite-groups').appendChild(document.getElementById(roomID))
+            }else if(res.status === 400){
+                return res.json().then((data) => {
+                    alert(data.message)
+                })
             }
-            console.log('error')
         })
         .catch((err) => {
-            console.log(err)
+            alert(err)
         })
 }

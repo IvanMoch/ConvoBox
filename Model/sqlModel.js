@@ -58,6 +58,19 @@ export class sqlModel {
         return false
     }
 
+    //This function checks if a room is a favorite of a user
+
+    static async checkFavoriteRoom({ userID, roomID }) {
+            
+            const [result] = await pool.query('select * from ConvoBox.favorites where user_id = UUID_TO_BIN(?) and room_id = UUID_TO_BIN(?)', [userID, roomID])
+    
+            if (result.length > 0) {
+                return true
+            }
+    
+            return false
+        }
+
     //This method gets the user information by it's username
     static async getUser({ username }) {
         
