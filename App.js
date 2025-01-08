@@ -30,7 +30,6 @@ io.on('connection', (socket) => {
     console.log('a user connected')
 
     socket.on('message', (msg) => {
-        console.log(msg)
         io.to(msg.room).emit('message', msg)
     })
 

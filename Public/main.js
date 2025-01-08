@@ -130,9 +130,22 @@ function sendMessage({ message, username }) {
 
     if (message.trim() !== '') {
 
-        socket.emit('message', { message, username, room: currentRoom })  
-        document.getElementById('messageInput').value = ''
-        document.getElementById('chatWindow').scrollTop = document.getElementById('chatWindow').scrollHeight
+        fetch('/api/room/senMessage', {
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify({ user_id: window.userID, content: message, room_id: currentRoom })
+        })
+            .then((res) => {
+                if (res.ok) {
+                socket.emit('message', { message, username, room: currentRoom })  
+                document.getElementById('messageInput').value = ''
+                document.getElementById('chatWindow').scrollTop = document.getElementById('chatWindow').scrollHeight
+            }
+        })
+
+        
 
     }
 }
