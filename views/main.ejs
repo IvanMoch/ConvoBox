@@ -6,8 +6,8 @@
   <title>ConvoBox - Main</title>
   <link rel="stylesheet" href="main.css">
   <script>
-    const userID = '<%= id %>';
-    const username = '<%= username %>'
+    window.userID = '<%= id %>';
+    window.username = '<%= username %>'
   </script>
 </head>
 <body>
@@ -49,13 +49,14 @@
         </div>
         <div class="chat-input">
           <input type="text" id="messageInput" placeholder="Type your message here...">
-          <button onclick="sendMessage()">Send</button>
+          <button onclick="sendMessage({username:username})">Send</button>
         </div>
       </div>
 
 
     
   </div>
-<script src="main.js"></script>
+<script type="module" src="./main.js">
+</script>
 </body>
 </html>

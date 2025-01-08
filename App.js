@@ -5,12 +5,14 @@ import cookieParser from 'cookie-parser'
 import jwt from 'jsonwebtoken'
 import path, { dirname } from 'path'
 import { SECRET_KEY } from './config.js'
-import { stat } from 'fs'
-import { render } from 'ejs'
+import { Server } from 'socket.io'
+import { createServer } from 'http'
 import { roomRouter } from './Routes/roomRouter.js'
 
 
 const app = express()
+const server = createServer(app)
+const io = new Server(server)
 const __fileName = fileURLToPath(import.meta.url)
 const __dirname = dirname(__fileName)
 
@@ -22,6 +24,24 @@ app.set('view engine', 'ejs')
 app.get('/', (req, res) => {
 
     res.render('login')
+})
+
+io.on('connection', (socket) => {
+    console.log('a user connected')
+
+    socket.on('message', (msg) => {
+        console.log(msg)
+        io.to(msg.room).emit('message', msg)
+    })
+
+
+    socket.on('disconnect', () => {
+        console.log('user disconnected')
+    })
+
+    socket.on('joinRoom', (roomID) => {
+        socket.join(roomID)
+    })
 })
 
 app.get('/main', (req, res) => {
@@ -43,6 +63,6 @@ app.get('/main', (req, res) => {
 app.use('/api/user', userRouter)
 app.use('/api/room', roomRouter)
 
-app.listen(3000, (req, res) => {
+server.listen(3000, (req, res) => {
     console.log(`Server listening on: http://localhost:3000/`)
 })

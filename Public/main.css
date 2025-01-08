@@ -215,6 +215,12 @@ header.blur-background {
   text-align: left;
 }
 
+.username {
+  font-size: 0.8em;
+  color: #ccc;
+  margin-top: 5px;
+}
+
 .add-to-favorites, .delete-from-favorites {
   position: absolute;
   top: 10px;

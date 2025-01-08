@@ -32,9 +32,9 @@ export class roomsController {
 
     static getRoom = async (req, res) => {
 
-        const { roomName } = req.params
+        const { roomName, roomID } = req.query
         
-        const result = await sqlModel.getRoom({ roomName })
+        const result = await sqlModel.getRoom({ roomName, id: roomID })
         
         if (result) {
             return res.status(200).json(result)
