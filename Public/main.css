@@ -239,3 +239,69 @@ header.blur-background {
 .add-to-favorites:hover {
   background-color: #9B59B6;
 }
+
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #2C2C2C;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.sidebar-content {
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: #D1D1D1;
+  text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+  color: #7D3C98;
+}
+
+.close-sidebar {
+  background: none;
+  border: none;
+  color: #D1D1D1;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* Sidebar Open State */
+.sidebar-open {
+  left: 0;
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #7D3C98; /* Bright Coral */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sidebar-toggle:hover {
+  background-color: #9B59B6; /* Darker Coral */
+}

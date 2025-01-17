@@ -8,6 +8,7 @@ import { SECRET_KEY } from './config.js'
 import { Server } from 'socket.io'
 import { createServer } from 'http'
 import { roomRouter } from './Routes/roomRouter.js'
+import  multer  from 'multer'
 
 
 const app = express()
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, '/Public')))
 app.use(express.json())
 app.use(cookieParser())
 app.set('view engine', 'ejs')
+app.use('/uploads', express.static('uploads'))
 
 app.get('/', (req, res) => {
 
@@ -58,6 +60,20 @@ app.get('/main', (req, res) => {
         res.status(400).send('<h1>User not found</h1>')
     }
 })
+
+app.get('/profile', (req, res) => {
+    const token = req.cookies.accessToken
+
+    try {
+        const data = jwt.verify(token, SECRET_KEY)
+        res.render('userProfile', data)
+    } catch (error) {
+        console.log(error)
+        res.status(400).send(`<h1>page not found</h1>`)
+    }
+})
+
+app.get()
 
 app.use('/api/user', userRouter)
 app.use('/api/room', roomRouter)

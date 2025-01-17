@@ -47,7 +47,7 @@ function login(username, password){
     })
         .then((res) => {
             if (res.ok) {
-                window.location.href = `/main`
+                return window.location.href = `/main`
             }
             alert('Username or password is incorrect')
         })

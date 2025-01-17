@@ -5,14 +5,15 @@ Content-Type: application/json
 
 
     {
-    "username": "BobM",
-    "password": "securePass1",
-    "email": "bobm@example.com"
+    "username": "IvanMoch2",
+    "password": "IvanMoch2",
+    "email": "IvanMoch@example.com",
+    "userImage": "/uploads/profile-pictures/"
     }
 
 ### Get user information
 
-GET http://Localhost:3000/api/user/search/IvanMoch
+GET http://Localhost:3000/api/user/search/IvanMoch2
 
 ### modify user information
 

@@ -74,6 +74,25 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 })
 
+// setup the sidebar
+
+document.addEventListener('DOMContentLoaded', () => {
+  const sidebar = document.getElementById('sidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const closeSidebar = document.getElementById('closeSidebar');
+
+  // Open the sidebar
+  sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.add('sidebar-open');
+  });
+
+  // Close the sidebar
+  closeSidebar.addEventListener('click', () => {
+    sidebar.classList.remove('sidebar-open');
+  });
+});
+
+
 // Allow pressing enter to send a message
 
 document.getElementById('messageInput').addEventListener('keyup', (event) => {

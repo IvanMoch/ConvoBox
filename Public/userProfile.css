@@ -1,0 +1,146 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #D1D1D1;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #1B1B1B;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #7D3C98;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-right: 10px;
+}
+
+.logout-button {
+  padding: 5px 10px;
+  background-color: #7D3C98;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #9B59B6;
+}
+
+/* Profile Container */
+.profile-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.profile-card {
+  background-color: #1B1B1B;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  width: 90%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2C2C2C;
+  color: #D1D1D1;
+  text-align: center;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#editButton {
+  background-color: #7D3C98;
+  color: white;
+}
+
+#editButton:hover {
+  background-color: #9B59B6;
+}
+
+#saveButton {
+  background-color: #444;
+  color: #888;
+  cursor: not-allowed;
+}
+
+#saveButton.enabled {
+  background-color: #7D3C98;
+  color: white;
+  cursor: pointer;
+}
+
+.back-button {
+  margin-top: 20px;
+  background-color: #2C2C2C;
+  color: #D1D1D1;
+}
+
+.back-button:hover {
+  background-color: #444;
+}
