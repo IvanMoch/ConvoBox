@@ -75,12 +75,12 @@ export class sqlModel {
     static async getUser({ username, id }) {
         
         if (username) {
-            const [result] = await pool.query(`select BIN_TO_UUID(id) as id, username, email, profile_photo from users where username=?`, [username])
+            const [result] = await pool.query(`select BIN_TO_UUID(id) as id, username, email, profile_photo, password from users where username=?`, [username])
             return result[0]
         }
 
         if (id) {    
-            const [result] = await pool.query(`select BIN_TO_UUID(id) as id, username, email, profile_photo from users where id=UUID_TO_BIN(?)`, [id])
+            const [result] = await pool.query(`select BIN_TO_UUID(id) as id, username, email, profile_photo, password from users where id=UUID_TO_BIN(?)`, [id])
             return result[0]
         }
     }

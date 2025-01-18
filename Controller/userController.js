@@ -37,6 +37,7 @@ export class UserController{
 
         user.password = hashedPassword
 
+        user.userImage = `uploads/profile-picture/${req.file.filename}` //save the image path to the database
 
         const result = await sqlModel.createUser(user)
 
@@ -51,7 +52,8 @@ export class UserController{
         const user = await sqlModel.getUser({ username })
         const checkedPassword = await bcryptjs.compare(password, user.password)
         if (user && checkedPassword) {
-            const token = jwt.sign({ username: user.username, email: user.email, id: user.id }, SECRET_KEY, { expiresIn: '1h' })
+            const profilePicture = `${req.protocol}://${req.get('host')}/${user.profile_photo}`
+            const token = jwt.sign({ username: user.username, email: user.email, id: user.id, profilePicture: profilePicture }, SECRET_KEY, { expiresIn: '1h' })
             return res.status(200).cookie('accessToken', token).json(user)
         }
 

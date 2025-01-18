@@ -1,0 +1,124 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #D1D1D1;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #1B1B1B;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #7D3C98;
+}
+
+/* Create User Container */
+.create-user-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #D1D1D1;
+}
+
+/* Form Styles */
+.form-container {
+  background-color: #1B1B1B;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2C2C2C;
+  color: #D1D1D1;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Button Styles */
+.submit-button {
+  background-color: #7D3C98;
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: #9B59B6;
+}
+
+.back-button {
+  margin-top: 20px;
+  background-color: #2C2C2C;
+  color: #D1D1D1;
+}
+
+.back-button:hover {
+  background-color: #444;
+}
+/* Additional Styles for Profile Photo Input */
+.form-group input[type="file"] {
+  padding: 5px;
+  background-color: #2C2C2C;
+  color: #D1D1D1;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button {
+  background-color: #7D3C98;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: #9B59B6;
+}

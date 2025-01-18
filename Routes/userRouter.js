@@ -2,7 +2,7 @@ import { Router } from "express";
 import { UserController } from "../Controller/userController.js";
 import { upload } from "../Middleware/upload.js";
 
-export const userRouter = Router()
+export const userRouter = new Router()
 
 userRouter.get('/search/:username', UserController.getUserInf)
 userRouter.post('/signUp', upload.single('profilePicture'), UserController.createUser)

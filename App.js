@@ -8,8 +8,6 @@ import { SECRET_KEY } from './config.js'
 import { Server } from 'socket.io'
 import { createServer } from 'http'
 import { roomRouter } from './Routes/roomRouter.js'
-import  multer  from 'multer'
-
 
 const app = express()
 const server = createServer(app)
@@ -25,7 +23,14 @@ app.use('/uploads', express.static('uploads'))
 
 app.get('/', (req, res) => {
 
-    res.render('login')
+    const accessToken = req.cookies.accessToken
+
+    try {
+        const data = jwt.verify(accessToken, SECRET_KEY)
+        res.render('main', data)
+    } catch (error) {
+        res.render('login')
+    }
 })
 
 io.on('connection', (socket) => {
@@ -48,16 +53,11 @@ io.on('connection', (socket) => {
 app.get('/main', (req, res) => {
     const token = req.cookies.accessToken
 
-    if (!token) {
-        return res.render('login')
-    }
-
     try {
         const data = jwt.verify(token, SECRET_KEY)
         res.render('main', data)
     } catch (error) {
-        console.error(error)
-        res.status(400).send('<h1>User not found</h1>')
+        res.render('login')
     }
 })
 
@@ -73,7 +73,9 @@ app.get('/profile', (req, res) => {
     }
 })
 
-app.get()
+app.get('/createUser', (req, res) => {
+    res.render('createUser')
+})
 
 app.use('/api/user', userRouter)
 app.use('/api/room', roomRouter)
