@@ -5,8 +5,8 @@ export class sqlModel {
     //This method creates a new User
     static async createUser( newUser ) {
 
-        const result = await pool.query(`insert into users(username,email,password, profile_photo)
-        values(?,?,?,?)`, [newUser.username, newUser.email, newUser.password, newUser.userImage])
+        const result = await pool.query(`insert into users(username,email,password, profile_photo, description)
+        values(?,?,?,?,?)`, [newUser.username, newUser.email, newUser.password, newUser.userImage, newUser.description])
         
 
         if (result.affectedRows > 0) {
@@ -39,7 +39,7 @@ export class sqlModel {
     //This method checks if a room exist
     static async checkRoom({ id, name }) {
 
-        let result
+        let result  
         
         if (id) {
             [result] = await pool.query('select * from ConvoBox.rooms where id = UUID_TO_BIN(?)', [id])
@@ -71,7 +71,7 @@ export class sqlModel {
             return false
         }
 
-    //This method gets the user information by it's username
+    //This method gets the user information by he's username
     static async getUser({ username, id }) {
         
         if (username) {
@@ -87,7 +87,7 @@ export class sqlModel {
 
     static async createRoom(newRoom) {
 
-        const result = pool.query(`insert into ConvoBox.rooms (name, private, description, likes) values(?,?,?,?)`, [newRoom.name, newRoom.private, newRoom.description, newRoom.likes])
+        const result = pool.query(`insert into ConvoBox.rooms (name, description, likes) values(?,?,0)`, [newRoom.name, newRoom.private])
 
         return result
 

@@ -77,6 +77,10 @@ app.get('/createUser', (req, res) => {
     res.render('createUser')
 })
 
+app.get('/createRoom', (req, res) => {
+    res.render('createRoom')
+})
+
 app.use('/api/user', userRouter)
 app.use('/api/room', roomRouter)
 

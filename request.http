@@ -5,10 +5,11 @@ Content-Type: application/json
 
 
     {
-    "username": "IvanMoch2",
-    "password": "IvanMoch2",
-    "email": "IvanMoch@example.com",
-    "userImage": "/uploads/profile-pictures/"
+    "username": "IvanMoch9",
+    "password": "IvanMoch9",
+    "email": "IvanMoch9@example.com",
+    "userImage": "/uploads/profile-pictures/",
+    "description": "The description of the user"
     }
 
 ### Get user information
@@ -39,10 +40,8 @@ POST http://localhost:3000/api/room/create
 Content-Type: application/json
 
 {
-    "name": "Chill Zone",
-    "private": 0,
-    "description": "A place to relax and unwind.",
-    "likes": 120
+    "name": "new roooomm",
+    "description": "A place to relax and unwind."
 }
 
 

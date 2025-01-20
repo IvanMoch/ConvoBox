@@ -17,10 +17,6 @@ export class roomsController {
             return res.status(400).json({message : 'Check the values'})
         }
 
-        if (await sqlModel.checkUser({ identifier: newRoom.data.name, field: 'name' })) {
-            return res.status(400).json({message: 'user already exist'})
-        }
-
         const result = sqlModel.createRoom(newRoom.data)
 
         if (result) {
