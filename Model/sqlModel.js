@@ -87,7 +87,7 @@ export class sqlModel {
 
     static async createRoom(newRoom) {
 
-        const result = pool.query(`insert into ConvoBox.rooms (name, description, likes) values(?,?,0)`, [newRoom.name, newRoom.private])
+        const result = pool.query(`insert into ConvoBox.rooms (name, description, likes) values(?,?,0)`, [newRoom.name, newRoom.description])
 
         return result
 
