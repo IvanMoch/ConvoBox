@@ -10,11 +10,11 @@ export class roomsController {
         const newRoom = validateRoom(req.body)
 
         if (await sqlModel.checkRoom({ name: newRoom.data.name })) {
-            return res.status(400).json({message : 'Room already exist'})
+            return res.status(400).json({ message: 'Room already exist' })
         }
 
         if (newRoom.error) {
-            return res.status(400).json({message : 'Check the values'})
+            return res.status(400).json({ message: 'Check the values' })
         }
 
         const result = sqlModel.createRoom(newRoom.data)
@@ -23,20 +23,34 @@ export class roomsController {
             return res.status(200).json(newRoom.data)
         }
 
-        return res.status(400).json({message: 'Query failed'})
+        return res.status(400).json({ message: 'Query failed' })
     }
 
-    static getRoom = async (req, res) => {
+    static getSingleRoom = async (req, res) => {
 
         const { roomName, roomID } = req.query
         
-        const result = await sqlModel.getRoom({ roomName, id: roomID })
+        const result = await sqlModel.getSingleRoom({ roomName, id: roomID })
         
         if (result) {
             return res.status(200).json(result)
         }
 
-        return res.status(400).json({message : "room not found"})
+        return res.status(400).json({ message: "room not found" })
+    }
+
+    static getManyRooms = async (req, res) => {
+        
+        const { roomName } = req.params
+        
+        try {
+            const result = await sqlModel.getManyRooms({ name: roomName })
+            res.status(200).json(result)
+        } catch (error) {
+            console.log(error)
+            res.status(400).json('error while fetching')
+        }
+        
     }
 
     static sendMessage = async (req, res) => {
@@ -106,7 +120,7 @@ export class roomsController {
         const result = await sqlModel.addFavoriteRoom({ userID, roomID })
         
         if (result) {
-            const room = await sqlModel.getRoom({ id: roomID })
+            const room = await sqlModel.getSingleRoom({ id: roomID })
             return res.status(200).json(room)
         }
 
@@ -140,7 +154,7 @@ export class roomsController {
             const result = await sqlModel.deleteFavoriteRoom({ userID, roomID })
     
         if (result) {
-                const room = await sqlModel.getRoom({ id: roomID })
+                const room = await sqlModel.getSingleRoom({ id: roomID })
                 return res.status(200).json(room)
             }
     

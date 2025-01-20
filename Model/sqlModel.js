@@ -93,7 +93,7 @@ export class sqlModel {
 
     }
 
-    static async getRoom({ roomName, id }) {
+    static async getSingleRoom({ roomName, id }) {
         
         if (roomName) {
             const [result] = await pool.query(`select BIN_TO_UUID(id) as id, name, private, description, likes from ConvoBox.rooms where name = ?`, [roomName])
@@ -103,6 +103,15 @@ export class sqlModel {
             const [result] = await pool.query(`select BIN_TO_UUID(id) as id, name, private, description, likes from ConvoBox.rooms where id = UUID_TO_BIN(?)`, [id])
             return result[0]
         }
+    }
+
+    static async getManyRooms({ name }) {
+        
+        const searchName = '%' + name + '%'
+
+        const [result] = await pool.query(`select BIN_TO_UUID(id) as id, name, description, likes from ConvoBox.rooms where name like ?`, [searchName])
+
+        return result
     }
 
     static async sendMessage(messageBody) {
