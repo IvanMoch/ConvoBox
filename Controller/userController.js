@@ -7,7 +7,7 @@ import { SECRET_KEY } from "../config.js"
 
 export class UserController{
     
-    static getUserInf = async (req, res) =>{
+    static getSingleUser = async (req, res) =>{
         const { username } = req.params
         
         const userInfo = await sqlModel.getUser({ username })
@@ -17,6 +17,18 @@ export class UserController{
         }
 
         return res.status(400).json({message: 'User not found'})
+    }
+
+    static getManyUsers = async (req, res) => {
+        const { username } = req.params
+        
+        try {
+            const result = await sqlModel.getManyUsers({ username })
+            res.status(200).json(result)
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({ message: 'error while fetching' })
+        }
     }
 
     static createUser = async (req, res) => {

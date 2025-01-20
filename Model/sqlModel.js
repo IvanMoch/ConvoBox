@@ -85,6 +85,15 @@ export class sqlModel {
         }
     }
 
+    static async getManyUsers({ username }) {
+        
+        const searchUsername = '%' + username + '%'
+
+        const [result] = await pool.query(`select BIN_TO_UUID(id) as id, username, email, profile_photo, password from users where username like ?`, [searchUsername])
+
+        return result
+    }
+
     static async createRoom(newRoom) {
 
         const result = pool.query(`insert into ConvoBox.rooms (name, description, likes) values(?,?,0)`, [newRoom.name, newRoom.description])

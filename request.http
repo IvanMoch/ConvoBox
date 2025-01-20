@@ -16,6 +16,10 @@ Content-Type: application/json
 
 GET http://Localhost:3000/api/user/search/IvanMoch2
 
+### Get many users information
+
+GET http://Localhost:3000/api/user/searchMany/Ivan
+
 ### modify user information
 
 PATCH http://Localhost:3000/api/user/IvanMoch
