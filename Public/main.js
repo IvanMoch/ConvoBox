@@ -284,3 +284,67 @@ window.deleteFromFavorites = deleteFromFavorites
 socket.on('message', (msg) => {
     printMessage({ message: msg.message, username: msg.username })
 })
+
+
+document.getElementById('searchBar').addEventListener('input', (e) => { 
+
+    e.preventDefault()
+
+    const searchResults = document.getElementById('searchResults')
+    const searchValue = e.target.value
+
+    if (e.target.value.length < 3) {
+        return searchResults.className = 'hidden'
+    }
+
+    document.getElementById('userResults').innerHTML = ''
+    document.getElementById('roomResults').innerHTML = ''
+
+    fetch(`/api/user/searchMany/${searchValue}`)
+    .then((res) => {
+        if (res.ok) {
+            return res.json()
+        }
+    })
+        .then((users) => {
+
+            if (users.length > 0) {
+                users.forEach((user) => {
+                    document.getElementById('userResults').innerHTML += `
+                    <a href="" style="text-decoration: none; color:#fff;"><li>${user.username}</li></a>
+                    `
+                })
+            } else {
+                document.getElementById('userResults').innerHTML = '<p>-No users found-</p>'
+            }
+
+        })
+        .catch((err) => {
+            console.log('users error:', err)
+        })
+    
+    fetch(`/api/room/searchMany/${searchValue}`)
+        .then((res) => {
+            if (res.ok) {
+                return res.json()
+            }
+        })
+        .then((rooms) => {
+        
+            if (rooms.length > 0) {
+                rooms.forEach((room) => {
+                    document.getElementById('roomResults').innerHTML += `
+                    <a href="" style="text-decoration: none; color:#fff;"><li>${room.name}</li></a>
+                    `
+                })
+            } else {
+                document.getElementById('roomResults').innerHTML = '<p>-No rooms found-</p>'
+            }
+    })
+    .catch((err) => {
+        console.log('rooms error: ',err)
+    })
+
+    searchResults.className = 'search-results'
+
+})

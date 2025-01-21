@@ -366,6 +366,9 @@ header.blur-background {
   z-index: 10; 
   padding: 10px;
   color: #FFFFFF;
+}
+
+.hidden {
   display: none;
 }
 
@@ -389,6 +392,15 @@ header.blur-background {
 
 .results-section ul li:last-child {
   border-bottom: none;
+}
+
+.results-section p{
+  padding: 10px 5px;
+  margin: 0;
+  border-bottom: 1px solid #555555;
+  font-weight: lighter;
+  font-style: italic;
+  text-align: center;
 }
 
 .hidden {
