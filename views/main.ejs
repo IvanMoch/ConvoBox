@@ -15,12 +15,32 @@
     <!-- Header -->
     <header class="header">
       <h1>ConvoBox</h1>
+      <input type="text" id="searchBar" class="search-bar" placeholder="Search for users or rooms..." />
       <div class="user-info">
         <span class="username">Hello, <%= username %></span>
         <button class="sidebar-toggle" id="sidebarToggle">☰</button>
         <button class="logout-button" onclick="logout()">Logout</button>
       </div>
     </header>
+
+    <!-- Search results side bar -->
+
+    <div id="searchResults" class="search-results">
+      <div class="results-section">
+        <h3>Users</h3>
+        <ul id="userResults">
+          <a href="" style="text-decoration: none; color:#fff;"><li>JohnDoe</li></a>
+          <a href="" style="text-decoration: none; color:#fff;"><li>JaneSmith</li></a>
+        </ul>
+      </div>
+      <div class="results-section">
+        <h3>Rooms</h3>
+        <ul id="roomResults">
+          <a href="" style="text-decoration: none; color:#fff;"><li>Sports talk</li></a>
+          <a href="" style="text-decoration: none; color:#fff;"><li>Gaming hub</li></a>
+        </ul>
+      </div>
+    </div>
 
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
