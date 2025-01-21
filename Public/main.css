@@ -326,7 +326,7 @@ header.blur-background {
 
 .search-bar {
   flex: 1;
-  margin: 0 60px;
+  margin: 0 100px;
   padding: 8px;
   font-size: 1em;
   border-radius: 5px;
@@ -358,8 +358,8 @@ header.blur-background {
 .search-results {
   position: absolute; 
   top: 10%; 
-  left: 150px; 
-  width: calc(100% - 400px); 
+  left: 200px; 
+  width: calc(100% - 500px); 
   background-color: #2C2C2C;
   border: 1px solid #555555;
   border-radius: 5px;
@@ -390,7 +390,7 @@ header.blur-background {
   border-bottom: 1px solid #555555;
 }
 
-.results-section ul li:last-child {
+.results-section ul li p:last-child {
   border-bottom: none;
 }
 

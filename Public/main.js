@@ -311,7 +311,7 @@ document.getElementById('searchBar').addEventListener('input', (e) => {
             if (users.length > 0) {
                 users.forEach((user) => {
                     document.getElementById('userResults').innerHTML += `
-                    <a href="" style="text-decoration: none; color:#fff;"><li>${user.username}</li></a>
+                    <a href="" style="text-decoration: none; color:#fff;"><li>${user.username} - <i>${user.description}</i></li></a>
                     `
                 })
             } else {
@@ -334,7 +334,7 @@ document.getElementById('searchBar').addEventListener('input', (e) => {
             if (rooms.length > 0) {
                 rooms.forEach((room) => {
                     document.getElementById('roomResults').innerHTML += `
-                    <a href="" style="text-decoration: none; color:#fff;"><li>${room.name}</li></a>
+                    <a href="" style="text-decoration: none; color:#fff;"><li>${room.name} - <i>${room.description}</i></li></a>
                     `
                 })
             } else {

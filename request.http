@@ -14,7 +14,7 @@ Content-Type: application/json
 
 ### Get user information
 
-GET http://Localhost:3000/api/user/search/IvanMoch2
+GET http://Localhost:3000/api/user/search/IvanMoch5
 
 ### Get many users information
 

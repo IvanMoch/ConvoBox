@@ -65,7 +65,7 @@ export class UserController{
         const checkedPassword = await bcryptjs.compare(password, user.password)
         if (user && checkedPassword) {
             const profilePicture = `${req.protocol}://${req.get('host')}/${user.profile_photo}`
-            const token = jwt.sign({ username: user.username, email: user.email, id: user.id, profilePicture: profilePicture }, SECRET_KEY, { expiresIn: '1h' })
+            const token = jwt.sign({ username: user.username, email: user.email, id: user.id, profilePicture: profilePicture, description: user.description }, SECRET_KEY, { expiresIn: '1h' })
             return res.status(200).cookie('accessToken', token).json(user)
         }
 

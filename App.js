@@ -8,6 +8,7 @@ import { SECRET_KEY } from './config.js'
 import { Server } from 'socket.io'
 import { createServer } from 'http'
 import { roomRouter } from './Routes/roomRouter.js'
+import { sqlModel } from './Model/sqlModel.js'
 
 const app = express()
 const server = createServer(app)
@@ -79,6 +80,26 @@ app.get('/createUser', (req, res) => {
 
 app.get('/createRoom', (req, res) => {
     res.render('createRoom')
+})
+
+app.get('/user/:username', async (req, res) => {
+
+    const { username } = req.params
+    
+    try {
+        const user = await sqlModel.getUser({ username: username })
+        user.profilePicture = `${req.protocol}://${req.get('host')}/${user.profile_photo}`
+        if (user) {
+            return res.status(200).render('userInformation', user)
+        }
+        return res.status(400).send(`<h1>user not found</h1>`)
+
+    } catch (error) {
+        console.log(error)
+        return res.status(400).send(`<h1>page not found</h1>`)
+    }
+    
+
 })
 
 app.use('/api/user', userRouter)

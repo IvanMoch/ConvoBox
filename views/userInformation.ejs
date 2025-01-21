@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile - ConvoBox</title>
+  <link rel="stylesheet" href="/userInformation.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <a href="/main" style="text-decoration: none;"><h1>ConvoBox</h1></a>
+      <div class="user-info">
+        <span class="username">Hello, <%= username %></span>
+        <button class="logout-button">Logout</button>
+      </div>
+    </header>
+
+    <!-- Profile Section -->
+    <main class="profile-container">
+      <h2>User Profile</h2>
+      <div class="profile-card">
+        <img src="<%= profilePicture %>" alt="User Avatar" class="profile-avatar">
+        <form id="profileForm">
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" value="<%= username %>" disabled>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" value="<%= email %>" disabled>
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio:</label>
+            <textarea id="bio" disabled><%= description %></textarea>
+          </div>
+    </main>
+  </div>
+  <script src="userInformation.js"></script>
+</body>
+</html>
+
