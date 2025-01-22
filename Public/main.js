@@ -138,6 +138,9 @@ function showChatWindow(roomID) {
         document.querySelector('main').classList.add('blur-background')
         document.querySelector('header').classList.add('blur-background')
     }, 250)
+
+    eraseResultBar()
+    closeResultBar()
     
 }
 
@@ -294,11 +297,10 @@ document.getElementById('searchBar').addEventListener('input', (e) => {
     const searchValue = e.target.value
 
     if (e.target.value.length < 3) {
-        return searchResults.className = 'hidden'
+        closeResultBar()
     }
 
-    document.getElementById('userResults').innerHTML = ''
-    document.getElementById('roomResults').innerHTML = ''
+    eraseResultBar()
 
     fetch(`/api/user/searchMany/${searchValue}`)
     .then((res) => {
@@ -311,7 +313,7 @@ document.getElementById('searchBar').addEventListener('input', (e) => {
             if (users.length > 0) {
                 users.forEach((user) => {
                     document.getElementById('userResults').innerHTML += `
-                    <a href="" style="text-decoration: none; color:#fff;"><li>${user.username} - <i>${user.description}</i></li></a>
+                    <a href="/user/${user.username}" style="text-decoration: none; color:#fff;"><li>${user.username} - <i>${user.description}</i></li></a>
                     `
                 })
             } else {
@@ -334,7 +336,7 @@ document.getElementById('searchBar').addEventListener('input', (e) => {
             if (rooms.length > 0) {
                 rooms.forEach((room) => {
                     document.getElementById('roomResults').innerHTML += `
-                    <a href="" style="text-decoration: none; color:#fff;"><li>${room.name} - <i>${room.description}</i></li></a>
+                    <a onclick="showChatWindow('${room.id}')" style="text-decoration: none; color:#fff;"><li>${room.name} - <i>${room.description}</i></li></a>
                     `
                 })
             } else {
@@ -348,3 +350,13 @@ document.getElementById('searchBar').addEventListener('input', (e) => {
     searchResults.className = 'search-results'
 
 })
+
+function eraseResultBar() {
+
+    document.getElementById('userResults').innerHTML = ''
+    document.getElementById('roomResults').innerHTML = ''
+}
+
+function closeResultBar() {
+    return searchResults.className = 'hidden'
+}

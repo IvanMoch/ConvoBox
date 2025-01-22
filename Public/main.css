@@ -409,4 +409,5 @@ header.blur-background {
 
 .results-section ul li:hover {
   background-color: #3E3E4E; /* Background color on hover */
+  cursor: pointer;
 }
