@@ -163,5 +163,22 @@ export class roomsController {
 
     static modifyRoom = async (req, res) => {
         
+
+        try {
+            const validateRoom = await validateRoom(req.body)
+            
+            if(validateRoom.error) {
+                return res.status(400).json({message: 'Check the values'})
+            }
+
+            const result = await sqlModel.modifyRoom(validateRoom.data)
+
+            if (result) {
+                return res.status(200).json(validateRoom.data)
+            }
+
+        } catch (error) {
+            return res.status(400).send('error while fetching')
+        }
     }
 }

@@ -12,6 +12,18 @@ Content-Type: application/json
     "description": "The description of the user"
     }
 
+### modify user
+
+PATCH http://Localhost:3000/api/user/modify
+Content-Type: application/json
+
+{
+    "username": "IvanMoch9",
+    "password": "IvanMoch9",
+    "email": "IvanMoch9@gmail.com",
+    "description": "The description of the user"
+}
+
 ### Get user information
 
 GET http://Localhost:3000/api/user/search/IvanMoch5

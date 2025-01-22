@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 import { sqlModel } from "../Model/sqlModel.js"
-import { validateUser } from "../Schemas/userSchema.js"
+import { validatePartialUser, validateUser } from "../Schemas/userSchema.js"
 import bcryptjs from 'bcryptjs'
 import { SECRET_KEY } from "../config.js"
 
@@ -82,6 +82,26 @@ export class UserController{
     }
 
     static modifyUser = async (req, res) => {
-        res.send('...')
+        
+        const verifiedUser = await validatePartialUser(req.body)
+
+        if (verifiedUser.error) {
+            return res.status(400).json({message: 'Check the values'})
+        }
+
+        const user = verifiedUser.data
+
+        try {
+            const result = await sqlModel.modifyUser(user)
+
+            if (result) {
+                return res.status(200).json(result)
+            }
+
+            return res.status(400).json({message: 'User not found'})
+        } catch (error) {
+            console.log(error)
+            return res.status(400).json({message: 'error while modifying'})
+        }
     }
 }

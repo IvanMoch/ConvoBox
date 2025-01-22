@@ -15,6 +15,20 @@ export class sqlModel {
         
     }
 
+    static async modifyRoom(room) {
+        
+        const result = await pool.query(`update ConvoBox.rooms set name=?, description=? where name=?`, [room.name, room.description, room.name])
+
+        return result
+    }
+
+    static async modifyUser(user) {
+
+        const result = await pool.query(`update ConvoBox.users set username=?, email=?, description=? where username=?`, [user.username, user.email, user.description, user.username])
+
+        return result
+    }
+
     //This method checks if a user exist
     static async checkUser({ id, username }) {
         

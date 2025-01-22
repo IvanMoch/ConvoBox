@@ -7,7 +7,7 @@ export const userRouter = new Router()
 userRouter.get('/search/:username', UserController.getSingleUser)
 userRouter.get('/searchMany/:username', UserController.getManyUsers)
 userRouter.post('/signUp', upload.single('profilePicture'), UserController.createUser)
-userRouter.patch('/modify/:username', UserController.modifyUser)
+userRouter.patch('/modify', UserController.modifyUser)
 userRouter.post('/logIn', UserController.logUser)
 userRouter.get('/logOut', UserController.logOut)
 
