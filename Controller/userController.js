@@ -95,10 +95,10 @@ export class UserController{
             const result = await sqlModel.modifyUser(user)
 
             if (result) {
-                return res.status(200).json(result)
+                return res.status(200).json({message : 'User saved successfully'})
             }
 
-            return res.status(400).json({message: 'User not found'})
+            return res.status(400).json({message: 'Error while modifying'})
         } catch (error) {
             console.log(error)
             return res.status(400).json({message: 'error while modifying'})

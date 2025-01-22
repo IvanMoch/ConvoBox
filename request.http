@@ -19,7 +19,6 @@ Content-Type: application/json
 
 {
     "username": "IvanMoch9",
-    "password": "IvanMoch9",
     "email": "IvanMoch9@gmail.com",
     "description": "The description of the user"
 }
