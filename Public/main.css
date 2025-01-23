@@ -159,6 +159,33 @@ header.blur-background {
   cursor: pointer;
 }
 
+.favorite-button {
+  background-color: #7D3C98;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 0.9em;
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: 6px;
+}
+
+.favorite-button:hover {
+  background-color: #9B59B6;
+}
+
+.favorite-button.added {
+  background-color: #28A745; /* Green color for added state */
+  color: #FFFFFF;
+  border: none;
+  cursor: not-allowed; /* Disable cursor interaction */
+}
+
+.favorite-button.added:hover {
+  background-color: #28A745; /* Keep the same color on hover */
+}
+
 .chat-messages {
   flex: 1;
   padding: 10px;

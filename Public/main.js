@@ -92,6 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// change the state of the add button for rooms
+
+document.getElementById('favoriteButton').addEventListener('click', (e) => {
+    e.preventDefault()
+    document.getElementById('favoriteButton').textContent = 'added'
+    document.getElementById('favoriteButton').className = 'favorite-button added'
+    document.getElementById('favoriteButton').disabled = true
+})
+
 
 // Allow pressing enter to send a message
 
@@ -112,18 +121,19 @@ window.closeChatWindow = closeChatWindow
 
 //This function show the chat window
 
-function showChatWindow(roomID) {
+async function showChatWindow(roomID) {
 
     currentRoom = roomID
 
     fetch(`/api/room/getMessages/${roomID}`)
-        .then((res) => { 
+        .then((res) => {
             if (res.ok) {
                 return res.json()
             }
         })
         .then((messages) => {
             document.querySelector('.room-name').innerHTML = document.getElementById(roomID).getAttribute('name')
+            document.getElementById('favoriteButton').className = 'favorite-button'
             document.getElementById('chatMessages').innerHTML = ''
             messages.forEach((message) => {
                 printMessage({ message: message.content, username: message.username })
@@ -133,6 +143,19 @@ function showChatWindow(roomID) {
         .catch((err) => {
             console.log(err)
         })
+    
+    const roomInf = await fetch(`/api/room/checkFavorite/${window.userID}/${roomID}`).then((res) => {
+        if (res.ok) {
+            return res.json()
+        }
+    })
+
+    document.getElementById('favoriteButton').className = 'hidden'
+
+    if (!roomInf.favorite) {
+        document.getElementById('favoriteButton').className = 'favorite-button'
+        document.getElementById('favoriteButton').setAttribute('onclick', `addToFavorites('${roomID}')`)
+    }
     setTimeout(() => {
         document.getElementById('chatWindow').style.display = 'flex'
         document.querySelector('main').classList.add('blur-background')
@@ -263,16 +286,19 @@ function deleteFromFavorites(roomID) {
             }
         })
         .then((room) => {
-            console.log(room)
-            document.getElementById('suggested-groups').innerHTML += `
-            
-            <div class="group-card" id="${room.id}" name="${room.name}">
-                <h3>${room.name}</h3>
-                <p>${room.description}</p>
-                <button class="add-to-favorites" onclick="addToFavorites('${room.id}')">Add</button>
-                <button class="show-chat" onClick="showChatWindow('${room.id}')">Enter Group</button>
-            </div>
-        `
+
+            for (const suggestedRoom of document.getElementById('suggested-groups').children) {
+                if (suggestedRoom.getAttribute.name === room.name) {
+                    document.getElementById('suggested-groups').innerHTML += `
+                    <div class="group-card" id="${room.id}" name="${room.name}">
+                        <h3>${room.name}</h3>
+                        <p>${room.description}</p>
+                        <button class="add-to-favorites" onclick="addToFavorites('${room.id}')">Add</button>
+                        <button class="show-chat" onClick="showChatWindow('${room.id}')">Enter Group</button>
+                    </div>
+                    `
+                }
+            }
         })
         .catch((err) => {
             console.log(err)
@@ -295,9 +321,8 @@ document.getElementById('searchBar').addEventListener('input', (e) => {
 
     const searchResults = document.getElementById('searchResults')
     const searchValue = e.target.value
-
     if (e.target.value.length < 3) {
-        closeResultBar()
+        return closeResultBar()
     }
 
     eraseResultBar()

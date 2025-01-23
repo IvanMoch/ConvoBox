@@ -181,4 +181,16 @@ export class roomsController {
             return res.status(400).send('error while fetching')
         }
     }
+
+    static checkFavorite = async (req, res) => {
+        const { userID, roomID } = req.params
+
+        const result = await sqlModel.checkFavoriteRoom({ userID, roomID })
+
+        if (result) {
+            return res.status(200).json({ favorite: true })
+        }
+
+        return res.status(200).json({ favorite: false })
+    }
 }
